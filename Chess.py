@@ -16,26 +16,25 @@ class chessBoard:
                 setUpString = "w" #White
         
         if setUpString in ["b", "black"]:
-            setUpString = "WRWNWBWKWQWBWNWRNNWPWPWPWPWPWPWPWPNN                NN                NN                NN                NNBPBPBPBPBPBPBPBPNNBRBNBBBKBQBBBNBREE" #Default Black Board Setup
+            setUpString = "♖♘♗♔♕♗♘♖N♙♙♙♙♙♙♙♙N        N        N        N        N♟♟♟♟♟♟♟♟N♜♞♝♚♛♝♞♜E" #Default Black Board Setup
             self.color = "black"
         elif setUpString in ["w", "white"]:
-            setUpString = "BRBNBBBQBKBBBNBRNNBPBPBPBPBPBPBPBPNN                NN                NN                NN                NNWPWPWPWPWPWPWPWPNNWRWNWBWQWKWBWNWREE" #Default White Board Setup
+            setUpString = "♜♞♝♛♚♝♞♜N♟♟♟♟♟♟♟♟N        N        N        N        N♙♙♙♙♙♙♙♙N♖♘♗♕♔♗♘♖E" #Default White Board Setup
             self.color = "white"
 
         self.board = [['re', 're', 're', 're', 're', 're', 're', 're'], ['re', 're', 're', 're', 're', 're', 're', 're'], ['re', 're', 're', 're', 're', 're', 're', 're'], ['re', 're', 're', 're', 're', 're', 're', 're'], ['re', 're', 're', 're', 're', 're', 're', 're'], ['re', 're', 're', 're', 're', 're', 're', 're'], ['re', 're', 're', 're', 're', 're', 're', 're'], ['re', 're', 're', 're', 're', 're', 're', 're']] #re for replace; [[]*8]*8 treated as 8 copies of the same list
         row = 0
         col = 0
-        for chars in range(0, len(setUpString), 2):
-            if setUpString[chars : chars + 2] == "NN":
+        for char in range(0, len(setUpString)):
+            if setUpString[char] == "N":
                 row += 1
                 col = 0
-            elif setUpString[chars : chars + 2] == "EE":
+            elif setUpString[char] == "E":
                 break
             else:
-                self.board[row][col] = setUpString[chars : chars + 2]
+                self.board[row][col] = setUpString[char]
                 col += 1
                 #print(self.board, "\n")
-        
         
     def showBoard(self):
         """
@@ -52,7 +51,7 @@ class chessBoard:
                 
                 print("\n")
 
-            print("   a   b   c   d   e   f   g   h")
+            print("   a  b  c  d  e  f  g  h\n")
         else:
             print("\n")
             for row in range(len(self.board)):
@@ -63,13 +62,20 @@ class chessBoard:
                 
                 print("\n")
 
-            print("   h   g   f   e   d   c   b   a\n")
-        
+            print("   h  g  f  e  d  c  b  a\n")
+    
+    def selectPiece(self, piece: str):
+        pass
+
+class pieces:
+    pass
+    
+
 board = chessBoard()
 userColor = ""
 colorQuestionCount = 0
 while userColor not in ["b", "black", "r", "random", "w", "white"]:
-    if colorQuestionCount > 1:
+    if colorQuestionCount > 0:
         print("Not a valid board input.")
     
     userColor = input("Which color would you like to be? ").lower()
